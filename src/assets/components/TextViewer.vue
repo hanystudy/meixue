@@ -1,12 +1,13 @@
 <template>
-  <pre v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
-    {{ text }}
+  <div v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})" v-html="markdownText">
     {{ scrollRatio }}
-  </pre>
+  </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import MarkdownIt from 'markdown-it'
+
 export default {
   props: {
     text: {
@@ -17,6 +18,12 @@ export default {
     },
     scrollType: {
       type: String
+    }
+  },
+  computed: {
+    markdownText () {
+      const md = new MarkdownIt()
+      return md.render(this.text)
     }
   },
   methods: {
@@ -33,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-pre {
+div {
   flex: 1;
   margin: 5px;
   overflow: scroll;

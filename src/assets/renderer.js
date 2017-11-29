@@ -3,6 +3,8 @@ import store from './store'
 import TextEditor from './components/TextEditor.vue'
 import TextViewer from './components/TextViewer.vue'
 
+require('./common.css')
+
 var app = new Vue({
     el: '#app',
     store,

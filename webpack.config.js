@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./src/assets/javascripts/renderer.js",
+    entry: "./src/assets/renderer.js",
     output: {
         path: __dirname,
         filename: "./public/bundle.js"
@@ -26,6 +26,10 @@ module.exports = {
             query: {
                 presets: ['es2015', 'stage-2']
             }
+        }, {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            loader: 'style-loader!css-loader'
         }]
     },
     resolve: {
