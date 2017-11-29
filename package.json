@@ -1,0 +1,21 @@
+{
+  "name": "meixue",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "author": "Han Yi",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "electron": "^1.7.9",
+    "vue": "^2.5.9",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^13.5.0",
+    "vue-template-compiler": "^2.5.9",
+    "vuex": "^3.0.1"
+  }
+}
