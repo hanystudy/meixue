@@ -1,5 +1,7 @@
 <template>
-  <textarea v-model="localText" v-on:input="updateText({text: $event.target.value})">
+  <textarea v-model="localText"
+            v-on:input="updateText({text: $event.target.value})"
+            v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
   </textarea>
 </template>
 
@@ -8,6 +10,12 @@ import { mapMutations } from 'vuex'
 export default {
   props: {
     text: {
+      type: String
+    },
+    scrollRatio: {
+      type: Number
+    },
+    scrollType: {
       type: String
     }
   },
@@ -18,9 +26,13 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'updateText'
+      'updateText',
+      'updateScrollTop'
     ])
   },
+  updated: function() {
+    this.$el.scrollTop = this.$el.scrollHeight * this.scrollRatio
+  }
 }
 </script>
 
@@ -28,5 +40,6 @@ export default {
 textarea {
   flex: 1;
   margin: 5px;
+  outline: none;
 }
 </style>

@@ -6,11 +6,14 @@ import TextViewer from './components/TextViewer.vue'
 var app = new Vue({
     el: '#app',
     store,
-    template: '<div v-bind:style="style"><TextViewer :text="text"/><TextEditor :text="text"/></div>',
+    template: '<div v-bind:style="style"><TextViewer :text="text" :scrollRatio="scrollRatio"/><TextEditor :text="text" :scrollRatio="scrollRatio"/></div>',
     components: { TextEditor, TextViewer },
     computed: {
         text () {
             return this.$store.state.text
+        },
+        scrollRatio () {
+            return this.$store.state.scrollRatio
         }
     },
     data() {
