@@ -1,3 +1,8 @@
 img {
   max-width: 35%;
 }
+
+ul, li {
+  list-style: none;
+  padding-left: 2px;
+}

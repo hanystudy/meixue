@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, dialog} = require('electron')
 const path = require('path')
 const url = require('url')
 
@@ -53,3 +53,33 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+function walkSync (dir, fileTree) {
+    var fs = fs || require('fs'),
+        files = fs.readdirSync(dir)
+    fileTree = fileTree || {
+        name: dir,
+        children: [],
+        path: dir
+    }
+    files.forEach(function(file) {
+        const path = dir + '/' + file
+        const fileNode = {
+            name: file,
+            children: [],
+            path
+        }
+        fileTree.children.push(fileNode)
+        if (fs.statSync(path).isDirectory()) {
+            walkSync(path, fileNode)
+        }
+    })
+    return fileTree
+}
+
+exports.selectDirectory = function () {
+    const path = dialog.showOpenDialog(win, {
+        properties: ['openDirectory']
+    })
+    if(path) return walkSync(path[0])
+    return []
+}
