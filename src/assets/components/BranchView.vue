@@ -78,4 +78,9 @@ export default {
 div {
   flex: 1;
 }
+
+ul, li {
+  white-space: nowrap;
+  cursor: default;
+}
 </style>
