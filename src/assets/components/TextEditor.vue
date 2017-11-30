@@ -1,7 +1,6 @@
 <template>
-  <textarea v-on:input="updateText({text: $event.target.value})"
-            v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
-    {{ text }}
+  <textarea :value="text" v-on:input="updateText({text: $event.target.value})"
+    v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
   </textarea>
 </template>
 
@@ -17,10 +16,6 @@ export default {
     },
     scrollType: {
       type: String
-    }
-  },
-  data: function () {
-    return {
     }
   },
   methods: {

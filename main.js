@@ -88,3 +88,16 @@ exports.selectFile = function (path) {
     var fs = fs || require('fs')
     return fs.readFileSync(path, 'utf8')
 }
+
+exports.writeFile = function (path, text) {
+    var fs = fs || require('fs')
+    return fs.writeFileSync(path, text)
+}
+
+exports.alertMessage = function (text) {
+    const response = dialog.showMessageBox({
+        message: text,
+        buttons: ['Yes', 'No', 'Cancel']
+    })
+    return response
+}
