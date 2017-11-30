@@ -1,7 +1,7 @@
 <template>
-  <textarea v-model="localText"
-            v-on:input="updateText({text: $event.target.value})"
+  <textarea v-on:input="updateText({text: $event.target.value})"
             v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
+    {{ text }}
   </textarea>
 </template>
 
@@ -21,7 +21,6 @@ export default {
   },
   data: function () {
     return {
-      localText: this.text
     }
   },
   methods: {

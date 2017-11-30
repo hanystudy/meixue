@@ -1,7 +1,7 @@
 <template>
   <li>
     <div
-     @click="toggle" >
+      @click="toggle" >
       {{ model.name }}
       <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
     </div>
@@ -12,6 +12,10 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import {remote} from 'electron'
+const mainProcess = remote.require('./main.js')
+
 export default {
   name: 'BranchView',
   data: function() {
@@ -34,8 +38,15 @@ export default {
   },
   methods: {
     toggle: function() {
-      this.open = !this.open
-    }
+      if(this.model.children && this.model.children.length) {
+        this.open = !this.open
+      } else {
+        this.readFile({text: mainProcess.selectFile(this.model.path)})
+      }
+    },
+    ...mapMutations([
+      'readFile'
+    ])
   },
   updated: function() {
   }

@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 div {
-  flex: 100;
+  flex: 1;
   margin: 5px;
   overflow: scroll;
 }

@@ -1,5 +1,7 @@
 img {
-  max-width: 35%;
+  margin: auto;
+  max-width: 50%;
+  display: block;
 }
 
 ul, li {

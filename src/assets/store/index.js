@@ -17,6 +17,9 @@ export const mutations = {
         const h = scrollHeight
         state.scrollRatio = h <= clientHeight ? 0 : scrollTop / (h - clientHeight)
         state.scrollType = type
+    },
+    readFile (state, { text }) {
+        state.text = text
     }
 }
 

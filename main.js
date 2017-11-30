@@ -83,3 +83,8 @@ exports.selectDirectory = function () {
     if(path) return walkSync(path[0])
     return []
 }
+
+exports.selectFile = function (path) {
+    var fs = fs || require('fs')
+    return fs.readFileSync(path, 'utf8')
+}
