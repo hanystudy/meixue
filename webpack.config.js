@@ -21,7 +21,7 @@ module.exports = {
             }
         }, {
             test: /\.js$/,
-            exclude: /node_modules/,
+            exclude: /node_modules(?![\\/]vue-awesome[\\/])/,
             loader: 'babel-loader',
             query: {
                 presets: ['es2015', 'stage-2']
