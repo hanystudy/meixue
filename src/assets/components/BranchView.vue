@@ -6,7 +6,7 @@
       <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
     </div>
     <ul v-show="open" v-if="isFolder">
-      <BranchView v-for="child in model.children" :model="child"/>
+      <BranchView v-for="child in model.children" :key="child.name" :model="child"/>
     </ul>
   </li>
 </template>

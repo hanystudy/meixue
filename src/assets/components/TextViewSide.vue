@@ -30,7 +30,7 @@ export default {
 <style scoped>
 div {
   position: relative;
-  width: 10px;
+  width: 20px;
 }
 
 .icon {
