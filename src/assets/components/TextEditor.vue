@@ -31,9 +31,17 @@ export default {
 </script>
 
 <style scoped>
+.textEditor {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
 textarea {
   flex: 1;
-  margin: 5px;
-  outline: none;
+  border: none;
+  font-size: 16px;
 }
 </style>
