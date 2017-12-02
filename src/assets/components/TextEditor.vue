@@ -1,12 +1,17 @@
 <template>
-  <textarea :value="text" v-on:input="updateText({text: $event.target.value})"
-    v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
-  </textarea>
+  <div class="textEditor">
+    <TextEditorToolBar />
+    <textarea :value="text" v-on:input="updateText({text: $event.target.value})"
+       v-on:scroll="updateScrollTop({scrollTop: $event.target.scrollTop, scrollHeight: $event.target.scrollHeight, clientHeight: $event.target.clientHeight})">
+    </textarea>
+  </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import TextEditorToolBar from './TextEditorToolBar.vue'
 export default {
+  components: { TextEditorToolBar },
   props: {
     text: {
       type: String
