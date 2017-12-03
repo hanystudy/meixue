@@ -1,5 +1,11 @@
 import Vue from 'vue'
 import store from './store'
+
+import KeenUI from 'keen-ui';
+import 'keen-ui/dist/keen-ui.css';
+
+Vue.use(KeenUI);
+
 import MainView from './components/MainView.vue'
 
 require('./common.css')
