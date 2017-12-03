@@ -53,6 +53,7 @@ div.textEditorToolBar {
   position: absolute;
   flex-direction: row-reverse;
   background: white;
+  z-index: 1000;
 }
 
 span {

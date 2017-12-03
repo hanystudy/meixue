@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  font-family: Helvetica;
 }
 
 img {
@@ -22,4 +23,14 @@ ul, li {
   margin: 0;
   list-style: none;
   padding-left: 2px;
+}
+
+.CodeMirror {
+  flex: 0 1 auto;
+  height: 100%;
+  font-size: 16px;
+}
+
+.CodeMirror pre {
+  word-break: break-all !important;
 }

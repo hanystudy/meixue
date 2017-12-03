@@ -1,43 +1,20 @@
 <template>
   <div class="textEditor">
+    <codemirror ref="textEditor" :code="text"
+                       :options="editorOptions"
+                       v-on:change="updateTextEditor"
+                       v-on:cursorActivity="textEditorSelectionChange"
+                       v-on:scroll="textEditorScroll"
+                       tabindex="-1"></codemirror>
     <TextEditorToolBar v-if="showEditorToolBar"
                        :left="toolBarLeft"
                        :top="toolBarTop"/>
-    <textarea :value="text" v-on:input="updateText({text: $event.target.value})"
-                       v-on:click="textEditorSelectionChange($event.target)"
-                       v-on:scroll="textEditorScroll($event)"
-                       tabindex="-1">
-    </textarea>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
 import TextEditorToolBar from './TextEditorToolBar.vue'
-
-function getCoord(text) {
-  let carPos = text.selectionEnd,
-    div = document.createElement('div'),
-    span = document.createElement('span'),
-    copyStyle = getComputedStyle(text),
-    coords = {}
-  Array.prototype.forEach.call(copyStyle, function(prop) {
-    div.style[prop] = copyStyle[prop]
-  })
-  div.style.position = 'absolute'
-  document.body.appendChild(div)
-  div.textContent = text.value.substr(0, carPos)
-  span.textContent = text.value.substr(carPos) || '.'
-  div.appendChild(span)
-  coords = {
-    TOP: span.offsetTop,
-    LEFT: span.offsetLeft
-  }
-  const left = text.offsetLeft - text.scrollLeft + coords.LEFT + 'px'
-  const top = text.offsetTop - text.scrollTop + coords.TOP + parseInt(copyStyle.fontSize) + 'px'
-  document.body.removeChild(div)
-  return [left, top]
-};
 
 export default {
   components: { TextEditorToolBar },
@@ -56,7 +33,16 @@ export default {
     return {
       showEditorToolBar: false,
       toolBarLeft: '0',
-      toolBarTop: '0'
+      toolBarTop: '0',
+      editorOptions: {
+        lineNumbers: false,
+        lineWrapping: true,
+        theme: 'monokai',
+        mode: {
+          name: 'markdown',
+          highlightFormatting: true
+        }
+      }
     }
   },
   methods: {
@@ -64,18 +50,20 @@ export default {
       'updateText',
       'updateScrollTop'
     ]),
-    editTextarea: function(editor) {
+    updateTextEditor: function(text) {
+      if(text != this.text)
+        this.updateText({text: text})
     },
     textEditorSelectionChange(el) {
-      if('selectionStart' in el) {
-        let pos = getCoord(el)
-        this.showEditorToolBar = true
-        this.toolBarLeft = pos[0]
-        this.toolBarTop = pos[1]
-      }
+      const cursorCoords = el.cursorCoords(true, 'local')
+      const scroll = el.getScrollInfo()
+      this.showEditorToolBar = true
+      this.toolBarLeft = cursorCoords.left + 8 + 'px'
+      this.toolBarTop = cursorCoords.top + 32 - scroll.top + 'px'
     },
     textEditorScroll: function(event) {
-      this.updateScrollTop({scrollTop: event.target.scrollTop, scrollHeight: event.target.scrollHeight, clientHeight: event.target.clientHeight})
+      const scroll = event.getScrollInfo()
+      this.updateScrollTop({scrollTop: scroll.top, scrollHeight: scroll.height, clientHeight: scroll.clientHeight})
     },
     textEditorBlur: function(event) {
     }
@@ -98,7 +86,6 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 5px;
 }
 
 textarea {

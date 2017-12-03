@@ -3,8 +3,10 @@ import store from './store'
 
 import KeenUI from 'keen-ui';
 import 'keen-ui/dist/keen-ui.css';
-
 Vue.use(KeenUI);
+
+import VueCodeMirror from 'vue-codemirror'
+Vue.use(VueCodeMirror)
 
 import MainView from './components/MainView.vue'
 

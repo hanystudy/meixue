@@ -17,6 +17,7 @@
     "style-loader": "^0.19.0",
     "vue": "^2.5.9",
     "vue-awesome": "^2.3.4",
+    "vue-codemirror": "^3.1.8",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.5.0",
     "vue-template-compiler": "^2.5.9",
