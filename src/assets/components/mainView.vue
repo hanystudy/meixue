@@ -57,6 +57,7 @@ export default {
 <style scoped>
 .mainWindow {
   display: flex;
+  position: relative;
   height: 100%;
   flex: 4;
   flex-direction: row;

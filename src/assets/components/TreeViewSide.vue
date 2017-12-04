@@ -29,27 +29,26 @@ export default {
 
 <style scoped>
 div {
-  position: relative;
-  width: 10px;
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  z-index: 1000;
 }
 
 .icon {
   position: absolute;
   top: 50%;
-  right: -25px;
   background: rgba(1,1,1,0.3);
-  width: 50px;
+  width: 25px;
   height: 50px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .icon svg {
   position: absolute;
   top: 18px;
-  left: 19px;
+  left: 4px;
   fill: white;
 }
 </style>

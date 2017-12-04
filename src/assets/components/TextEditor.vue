@@ -1,11 +1,11 @@
 <template>
   <div class="textEditor">
     <codemirror ref="textEditor" :code="text"
-                       :options="editorOptions"
-                       v-on:change="updateTextEditor"
-                       v-on:cursorActivity="textEditorSelectionChange"
-                       v-on:scroll="textEditorScroll"
-                       tabindex="-1"></codemirror>
+                :options="editorOptions"
+                v-on:change="updateTextEditor"
+                v-on:cursorActivity="textEditorSelectionChange"
+                v-on:scroll="textEditorScroll"
+                tabindex="-1"></codemirror>
     <TextEditorToolBar v-if="showEditorToolBar"
                        :left="toolBarLeft"
                        :top="toolBarTop"/>
@@ -84,6 +84,7 @@ export default {
 .textEditor {
   position: relative;
   flex: 1;
+  width: 0;
   display: flex;
   flex-direction: column;
 }

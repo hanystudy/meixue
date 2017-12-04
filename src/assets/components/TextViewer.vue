@@ -42,8 +42,9 @@ export default {
 <style scoped>
 div {
   flex: 1;
+  width: 0;
+  padding: 0 5px;
   overflow: scroll;
-  word-break: break-all !important;
 }
 
 ::-webkit-scrollbar {

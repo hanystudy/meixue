@@ -32,6 +32,7 @@ export default {
 <style scoped>
 div {
   flex: 1;
+  width: 0;
   padding: 5px;
   overflow: scroll;
   font-size: 14px;
