@@ -11,6 +11,14 @@
         <ui-button @click="$refs.insertImageDialog.close()">Cancel</ui-button>
       </div>
     </ui-modal>
+    <span><Icon name="code" scale="1"/></span>
+    <span><Icon name="header" scale="1"/></span>
+    <span><Icon name="link" scale="1"/></span>
+    <span><Icon name="italic" scale="1"/></span>
+    <span><Icon name="bold" scale="1"/></span>
+    <span><Icon name="repeat" scale="1"/></span>
+    <span><Icon name="undo" scale="1"/></span>
+    <span><Icon name="strikethrough" scale="1"/></span>
   </div>
 </template>
 
