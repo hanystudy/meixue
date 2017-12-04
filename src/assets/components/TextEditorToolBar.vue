@@ -1,13 +1,13 @@
 <template>
   <div class="textEditorToolBar" v-bind:style="style">
-    <span @click="insertImage">
+    <span @click="openInsertImage">
       <Icon name="picture-o" scale="1"/>
     </span>
     <ui-modal ref="insertImageDialog" size="normal" title="Insert Image">
-      <ui-textbox label="Label" placeholder="Input image label"></ui-textbox>
-      <ui-textbox label="Link" placeholder="Input image link"></ui-textbox>
+      <ui-textbox v-model="imageLabel" label="Label" placeholder="Input image label"></ui-textbox>
+      <ui-textbox v-model="imageLink" label="Link" placeholder="Input image link"></ui-textbox>
       <div slot="footer">
-        <ui-button color="primary">Insert</ui-button>
+        <ui-button color="primary" @click="insertImage">Insert</ui-button>
         <ui-button @click="$refs.insertImageDialog.close()">Cancel</ui-button>
       </div>
     </ui-modal>
@@ -27,13 +27,26 @@ export default {
     },
     top: {
       type: String
+    },
+    editorInstance: {
+      type: Object
+    }
+  },
+  data: function() {
+    return {
+      imageLabel: '',
+      imageLink: ''
     }
   },
   methods: {
     ...mapMutations([
     ]),
-    insertImage: function() {
+    openInsertImage: function() {
       this.$refs.insertImageDialog.open()
+    },
+    insertImage: function() {
+      this.editorInstance.replaceSelection(`![${this.imageLabel}](${this.imageLink})`)
+      this.$refs.insertImageDialog.close()
     }
   },
   computed: {

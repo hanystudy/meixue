@@ -7,6 +7,7 @@
                 v-on:scroll="textEditorScroll"
                 tabindex="-1"></codemirror>
     <TextEditorToolBar v-if="showEditorToolBar"
+                       :editorInstance="editorInstance"
                        :left="toolBarLeft"
                        :top="toolBarTop"/>
   </div>
@@ -42,7 +43,8 @@ export default {
           name: 'markdown',
           highlightFormatting: true
         }
-      }
+      },
+      editorInstance: null
     }
   },
   methods: {
@@ -60,9 +62,11 @@ export default {
       this.showEditorToolBar = true
       this.toolBarLeft = cursorCoords.left + 8 + 'px'
       this.toolBarTop = cursorCoords.top + 32 - scroll.top + 'px'
+      this.editorInstance = el
     },
     textEditorScroll: function(event) {
       const scroll = event.getScrollInfo()
+      this.showEditorToolBar = false
       this.updateScrollTop({scrollTop: scroll.top, scrollHeight: scroll.height, clientHeight: scroll.clientHeight})
     },
     textEditorBlur: function(event) {
