@@ -3,8 +3,12 @@
     <TreeView v-show="showTreeView" @mouseover.native="hoverOnTreeView = true" @mouseleave.native="hoverOnTreeView = false"/>
     <TreeViewSide :hover="hoverOnTreeView" :icon="iconTreeView" @click.native="showTreeView = !showTreeView" @mouseover.native="hoverOnTreeView = true" @mouseleave.native="hoverOnTreeView = false"/>
     <div :class="mainWindowStyle">
-      <TextViewer :text="text" :scrollRatio="scrollRatio"/>
-      <TextViewSide :hover="hoverOnTextViewSide" icon="exchange" @click.native="swapMainWindow" @mouseover.native="hoverOnTextViewSide = true" @mouseleave.native="hoverOnTextViewSide = false"/>
+      <TextViewer v-if="showTextView" :text="text" :scrollRatio="scrollRatio"/>
+      <TextViewSide :hover="hoverOnTextViewSide"
+                  :toggleSplitting="toggleSplitting"
+                  :swapMainWindow="swapMainWindow"
+                  @mouseover.native="hoverOnTextViewSide = true"
+                  @mouseleave.native="hoverOnTextViewSide = false"/>
       <TextEditor :text="text" :scrollRatio="scrollRatio"/>
     </div>
   </div>
@@ -40,7 +44,8 @@ export default {
       hoverOnTreeView: false,
       showTreeView: true,
       hoverOnTextViewSide: false,
-      showTextViewSide: false
+      showTextViewSide: false,
+      showTextView: true
     }
   },
   methods: {
@@ -49,6 +54,9 @@ export default {
         this.mainWindowStyle = 'mainWindow swap'
       else
         this.mainWindowStyle = 'mainWindow'
+    },
+    toggleSplitting: function() {
+      this.showTextView = !this.showTextView
     }
   }
 }

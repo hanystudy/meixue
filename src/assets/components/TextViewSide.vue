@@ -1,7 +1,10 @@
 <template>
   <div>
-    <span v-if="hover" class="icon">
-      <Icon :name="icon"/>
+    <span v-if="hover" class="icon" @click="swapMainWindow">
+      <Icon name="exchange"/>
+    </span>
+    <span v-if="hover" class="icon" @click="toggleSplitting">
+      <Icon name="columns"/>
     </span>
   </div>
 </template>
@@ -20,8 +23,11 @@ export default {
     hover: {
       type: Boolean
     },
-    icon: {
-      type: String
+    swapMainWindow: {
+      type: Function
+    },
+    toggleSplitting: {
+      type: Function
     }
   }
 }
@@ -40,7 +46,8 @@ div {
 }
 
 .icon {
-  position: absolute;
+  display: inline-block;
+  position: relative;
   background: rgba(1,1,1,0.3);
   width: 50px;
   height: 50px;
