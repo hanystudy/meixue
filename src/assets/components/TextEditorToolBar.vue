@@ -11,7 +11,7 @@
         <ui-button @click="$refs.insertImageDialog.close()">Cancel</ui-button>
       </div>
     </ui-modal>
-    <span><Icon name="code" scale="1"/></span>
+    <span @click="insertCode"><Icon name="code" scale="1"/></span>
     <span><Icon name="header" scale="1"/></span>
     <span><Icon name="link" scale="1"/></span>
     <span><Icon name="italic" scale="1"/></span>
@@ -55,6 +55,9 @@ export default {
     insertImage: function() {
       this.editorInstance.replaceSelection(`![${this.imageLabel}](${this.imageLink})`)
       this.$refs.insertImageDialog.close()
+    },
+    insertCode: function() {
+      this.editorInstance.replaceSelection('\n```\n\n```\n')
     }
   },
   computed: {
