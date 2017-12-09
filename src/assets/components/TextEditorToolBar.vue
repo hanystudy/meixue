@@ -12,7 +12,7 @@
       </div>
     </ui-modal>
     <span @click="insertCode"><Icon name="code" scale="1"/></span>
-    <span><Icon name="header" scale="1"/></span>
+    <span @click="insertHeader"><Icon name="header" scale="1"/></span>
     <span><Icon name="link" scale="1"/></span>
     <span><Icon name="italic" scale="1"/></span>
     <span><Icon name="bold" scale="1"/></span>
@@ -57,7 +57,15 @@ export default {
       this.$refs.insertImageDialog.close()
     },
     insertCode: function() {
-      this.editorInstance.replaceSelection('\n```\n\n```\n')
+      this.editorInstance.replaceSelection('\n```\n' + this.editorInstance.getSelection() + '\n```\n')
+    },
+    insertHeader: function() {
+      const selection = this.editorInstance.getSelection()
+      if (selection.startsWith('#')) {
+        this.editorInstance.replaceSelection('#' + selection)
+      } else {
+        this.editorInstance.replaceSelection('\n# ' + selection + '\n')
+      }
     }
   },
   computed: {
