@@ -23,7 +23,7 @@
       </div>
     </ui-modal>
     <span @click="insertItalic"><Icon name="italic" scale="1"/></span>
-    <span><Icon name="bold" scale="1"/></span>
+    <span @click="insertBold"><Icon name="bold" scale="1"/></span>
     <span><Icon name="repeat" scale="1"/></span>
     <span><Icon name="undo" scale="1"/></span>
     <span><Icon name="strikethrough" scale="1"/></span>
@@ -88,6 +88,10 @@ export default {
     insertItalic: function() {
       const selection = this.editorInstance.getSelection()
       this.editorInstance.replaceSelection(` *${selection}* `)
+    },
+    insertBold: function() {
+      const selection = this.editorInstance.getSelection()
+      this.editorInstance.replaceSelection(` **${selection}** `)
     }
   },
   computed: {
