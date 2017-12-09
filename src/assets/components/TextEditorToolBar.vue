@@ -13,7 +13,15 @@
     </ui-modal>
     <span @click="insertCode"><Icon name="code" scale="1"/></span>
     <span @click="insertHeader"><Icon name="header" scale="1"/></span>
-    <span><Icon name="link" scale="1"/></span>
+    <span @click="openInsertLink"><Icon name="link" scale="1"/></span>
+    <ui-modal ref="insertLinkDialog" size="normal" title="Insert Link">
+      <ui-textbox v-model="linkLabel" label="Label" placeholder="Input link label"></ui-textbox>
+      <ui-textbox v-model="linkValue" label="Link" placeholder="Input link value"></ui-textbox>
+      <div slot="footer">
+        <ui-button color="primary" @click="insertLink">Insert</ui-button>
+        <ui-button @click="$refs.insertLinkDialog.close()">Cancel</ui-button>
+      </div>
+    </ui-modal>
     <span><Icon name="italic" scale="1"/></span>
     <span><Icon name="bold" scale="1"/></span>
     <span><Icon name="repeat" scale="1"/></span>
@@ -43,7 +51,9 @@ export default {
   data: function() {
     return {
       imageLabel: '',
-      imageLink: ''
+      imageLink: '',
+      linkLabel: '',
+      linkValue: ''
     }
   },
   methods: {
@@ -66,7 +76,15 @@ export default {
       } else {
         this.editorInstance.replaceSelection('\n# ' + selection + '\n')
       }
-    }
+    },
+    openInsertLink: function() {
+      this.linkLabel = this.editorInstance.getSelection()
+      this.linkValue = ''
+      this.$refs.insertLinkDialog.open()
+    },
+    insertLink: function() {
+      this.editorInstance.replaceSelection(`[${this.linkLabel}](${this.linkValue})`)
+    },
   },
   computed: {
     style: function() {
