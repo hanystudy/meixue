@@ -22,7 +22,7 @@
         <ui-button @click="$refs.insertLinkDialog.close()">Cancel</ui-button>
       </div>
     </ui-modal>
-    <span><Icon name="italic" scale="1"/></span>
+    <span @click="insertItalic"><Icon name="italic" scale="1"/></span>
     <span><Icon name="bold" scale="1"/></span>
     <span><Icon name="repeat" scale="1"/></span>
     <span><Icon name="undo" scale="1"/></span>
@@ -85,6 +85,10 @@ export default {
     insertLink: function() {
       this.editorInstance.replaceSelection(`[${this.linkLabel}](${this.linkValue})`)
     },
+    insertItalic: function() {
+      const selection = this.editorInstance.getSelection()
+      this.editorInstance.replaceSelection(` *${selection}* `)
+    }
   },
   computed: {
     style: function() {
