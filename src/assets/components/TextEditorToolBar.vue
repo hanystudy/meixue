@@ -26,7 +26,7 @@
     <span @click="insertBold"><Icon name="bold" scale="1"/></span>
     <span @click="redo"><Icon name="repeat" scale="1"/></span>
     <span @click="undo"><Icon name="undo" scale="1"/></span>
-    <span><Icon name="strikethrough" scale="1"/></span>
+    <span @click="strikethrough"><Icon name="strikethrough" scale="1"/></span>
   </div>
 </template>
 
@@ -87,17 +87,21 @@ export default {
     },
     insertItalic: function() {
       const selection = this.editorInstance.getSelection()
-      this.editorInstance.replaceSelection(` *${selection}* `)
+      this.editorInstance.replaceSelection(` *${selection || ' '}* `)
     },
     insertBold: function() {
       const selection = this.editorInstance.getSelection()
-      this.editorInstance.replaceSelection(` **${selection}** `)
+      this.editorInstance.replaceSelection(` **${selection || ' '}** `)
     },
     undo: function() {
       this.editorInstance.undo()
     },
     redo: function() {
       this.editorInstance.redo()
+    },
+    strikethrough: function() {
+      const selection = this.editorInstance.getSelection()
+      this.editorInstance.replaceSelection(` ~~${selection || ' '}~~ `)
     }
   },
   computed: {
